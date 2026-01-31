@@ -18,24 +18,6 @@ O código demonstra como:
 - Executar uma syscall de forma **indireta**
 - Alocar memória via `NtAllocateVirtualMemory` sem APIs de alto nível
 
-Essa abordagem é comumente utilizada para **bypass de hooks em userland** implementados por AVs e EDRs.
-
----
-
-## 🧠 O que é Indirect Syscall?
-
-Um **Indirect Syscall** ocorre quando o código:
-
-- ❌ Não chama diretamente a API (`NtAllocateVirtualMemory`)
-- ❌ Não executa explicitamente a instrução `sysenter`
-- ✅ Reutiliza um **gadget existente** dentro da `ntdll`
-- ✅ Controla manualmente registradores como `EAX` (SSN) e `EDX`
-- ✅ Entra no kernel através de código já mapeado
-
-Diferente de **direct syscalls**, aqui o fluxo depende de um stub/gadget presente na própria `ntdll.dll`.
-
----
-
 ## 🧩 Principais Componentes
 
 ### 🔹 Estruturas Internas
